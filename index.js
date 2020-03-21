@@ -7,21 +7,20 @@ const lineReader = require("readline").createInterface({
 });
 
 lineReader.on("line", function(line) {
-  //console.log("Line from file:", line);
   checkSSL(line);
 });
 
 const checkSSL = function(site) {
   sslCertificate.get(site).then(function(certificate) {
-    //console.log(site);
-    //console.log(certificate.valid_from);
-    console.log(certificate.valid_to);
-    //sendLine("aaa", "test");
+    //console.log(certificate.valid_to);
     const validDate = moment(certificate.valid_to, "MMM DD HH:mm:ss YYYY");
-    console.log(validDate.format("MMM DD HH:mm:ss YYYY"));
+    //console.log(validDate.format("MMM DD HH:mm:ss YYYY"));
     const currentDate = moment();
     const diffDate = validDate.diff(currentDate, "days");
-    console.log(diffDate);
+    //console.log(diffDate);
+    if (diffDate <= 10) {
+      sendLine("aaa", "ssl:"+ site+" expire:"+certificate.valid_to+"   "+diffDate+" days");
+    }
   });
 };
 
