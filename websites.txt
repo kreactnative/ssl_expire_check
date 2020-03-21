@@ -1,6 +1,5 @@
-freshket.com
-freshket.net
-freshket.co
-www.freshket.com
-www.freshket.net
-www.freshket.co
+handigo.run
+www.handigo.run
+api.handigo.run
+apidev.handigo.run
+apistaging.handigo.run
