@@ -12,32 +12,37 @@ lineReader.on("line", function(line) {
 });
 
 const checkSSL = function(site) {
-  sslCertificate.get(site).then(function(certificate) {
-    console.log("check ssl ", site);
-    console.log(certificate.issuer.CN);
-    console.log(certificate.valid_to);
-    const validDate = moment(
-      certificate.valid_to,
-      "MMM DD HH:mm:ss YYYY [GMT]"
-    );
-    console.log(validDate.format("MMM DD HH:mm:ss YYYY [GMT]"));
-    const currentDate = moment();
-    const diffDate = validDate.diff(currentDate, "days");
-    console.log(diffDate);
-    if (diffDate <= 10) {
-      sendLine(
-        "ssl:" +
-          site +
-          " cn:" +
-          certificate.issuer.CN +
-          " expire @ " +
-          certificate.valid_to +
-          "   " +
-          diffDate +
-          " days"
+  sslCertificate
+    .get(site)
+    .then(function(certificate) {
+      console.log("check ssl ", site);
+      console.log(certificate.issuer.CN);
+      console.log(certificate.valid_to);
+      const validDate = moment(
+        certificate.valid_to,
+        "MMM DD HH:mm:ss YYYY [GMT]"
       );
-    }
-  });
+      console.log(validDate.format("MMM DD HH:mm:ss YYYY [GMT]"));
+      const currentDate = moment();
+      const diffDate = validDate.diff(currentDate, "days");
+      console.log(diffDate);
+      if (diffDate <= 10) {
+        sendLine(
+          "ssl:" +
+            site +
+            " cn:" +
+            certificate.issuer.CN +
+            " expire @ " +
+            certificate.valid_to +
+            "   " +
+            diffDate +
+            " days"
+        );
+      }
+    })
+    .catch(function(e) {
+      console.log(e);
+    });
 };
 
 const sendLine = function(message) {
