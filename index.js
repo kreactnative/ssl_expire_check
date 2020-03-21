@@ -41,6 +41,7 @@ const checkSSL = function(site) {
       }
     })
     .catch(function(e) {
+      console.log("check ssl  Error :", site);
       console.log(e);
     });
 };

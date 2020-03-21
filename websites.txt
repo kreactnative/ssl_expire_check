@@ -4,5 +4,3 @@ api.handigo.run
 apidev.handigo.run
 apistaging.handigo.run
 git.socket9.com
-socket9.com
-www.socket9.com
