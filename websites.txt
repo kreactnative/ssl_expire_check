@@ -1,6 +1,1 @@
-handigo.run
-www.handigo.run
-api.handigo.run
-apidev.handigo.run
-apistaging.handigo.run
-git.socket9.com
+
